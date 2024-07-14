@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Image, Text, useBreakpointValue } from '@chakra-ui/react';
-import logoLight from './Assets/icon.png'; // Update with the path to your logo image
-import logoDark from './Assets/icon.png'; // Update with the path to your logo image
+import logoLight from '../../Assets/icon.png'; // Update with the path to your logo image
+import logoDark from '../../Assets/icon.png'; // Update with the path to your logo image
 
 const Logo: React.FC = () => {
   const logoSrc = useBreakpointValue({

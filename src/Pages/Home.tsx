@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, ChakraProvider } from '@chakra-ui/react';
-import Header from './Header'; // Import the Header component
-import AppList from './AppList'; // Import the AppList component
-import Footer from './Components/Footer/Footer';
+import Header from '../Components/Header'; // Import the Header component
+import AppList from '../Components/List/AppList'; // Import the AppList component
+import Footer from '../Components/Footer';
 
 // mockData.js
 export const mockData = [

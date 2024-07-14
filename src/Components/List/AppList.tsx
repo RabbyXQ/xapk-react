@@ -9,7 +9,7 @@ import {
   VStack, 
   HStack 
 } from '@chakra-ui/react';
-import { AppItem } from './AppItem'; // Import the type for better type safety
+import { AppItem } from '../Card/AppItem'; // Import the type for better type safety
 
 interface AppListProps {
   items: AppItem[];
