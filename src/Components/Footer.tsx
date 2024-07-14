@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             </Link>
           </Stack>
         </Flex>
-        <Divider borderColor={dividerColor} width="full" />
+        
       </Stack>
     </Box>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChakraProvider, Box, Flex } from '@chakra-ui/react';
-import Sidebar from './Sidebar';
-import NavBar from './NavBar';
+import Sidebar from './Sidebar/Sidebar';
+import NavBar from './NavBar/NavBar';
 import Logo from './Header/Logo';
 import Search from './Search';
 import Profile from './Profile'; // Import the Profile component
