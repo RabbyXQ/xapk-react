@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Avatar, Text, Collapse, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Avatar, Text, Collapse, VStack, Button, useColorModeValue } from '@chakra-ui/react';
 
 const Profile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // Manage profile details visibility
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Manage login state
 
   // Toggle the visibility of profile details
   const toggleProfile = () => setIsOpen(prev => !prev);
@@ -18,40 +19,49 @@ const Profile: React.FC = () => {
 
   return (
     <Box position="relative">
-      {/* Avatar */}
-      <Avatar
-        size="sm"
-        name={userName}
-        src={profilePicUrl}
-        bg={avatarBg}
-        cursor="pointer"
-        onClick={toggleProfile}
-        mb="4"
-      />
+      {isLoggedIn ? (
+        <>
+          {/* Avatar */}
+          <Avatar
+            size="sm"
+            name={userName}
+            src={profilePicUrl}
+            bg={avatarBg}
+            cursor="pointer"
+            onClick={toggleProfile}
+            mb="4"
+            my="2"
+          />
 
-      {/* Profile Details */}
-      <Collapse in={isOpen}>
-        <Box
-          position="absolute"
-          top="100%" // Position below the avatar
-          right="0"
-          bg={profileBg}
-          boxShadow="md"
-          borderRadius="md"
-          p="4"
-          mt="2"
-          zIndex="2"
-          width="250px" // Set a fixed width for the profile dropdown
-          transition="all 0.3s ease-in-out" // Smooth transition for appearance
-        >
-          <VStack spacing="4" align="start">
-            <Text fontWeight="bold" color={textColor}>{userName}</Text>
-            <Text color={textColor}>Email: user@example.com</Text>
-            <Text color={textColor}>Profile Settings</Text>
-            <Text color={textColor}>Logout</Text>
-          </VStack>
-        </Box>
-      </Collapse>
+          {/* Profile Details */}
+          <Collapse in={isOpen}>
+            <Box
+              position="absolute"
+              top="100%" // Position below the avatar
+              right="0"
+              bg={profileBg}
+              boxShadow="md"
+              borderRadius="md"
+              p="4"
+              mt="2"
+              zIndex="2"
+              width="250px" // Set a fixed width for the profile dropdown
+              transition="all 0.3s ease-in-out" // Smooth transition for appearance
+            >
+              <VStack spacing="4" align="start">
+                <Text fontWeight="bold" color={textColor}>{userName}</Text>
+                <Text color={textColor}>Email: user@example.com</Text>
+                <Text color={textColor}>Profile Settings</Text>
+                <Text color={textColor}>Logout</Text>
+              </VStack>
+            </Box>
+          </Collapse>
+        </>
+      ) : (
+        <Button my="2" size="sm" colorScheme="teal" onClick={() => setIsLoggedIn(true)}>
+          Login
+        </Button>
+      )}
     </Box>
   );
 };

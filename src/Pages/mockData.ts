@@ -1,6 +1,6 @@
 export const mockData = [
     {
-      title: 'WhatsApp',
+      title: 'WhatsApp-Socail messaging application, get together all over the world hello wrold hello hello WhatsApp-Socail messaging application, get together all over the world hello wrold hello hello',
       description: 'The world’s most popular messaging app.',
       developer: 'WhatsApp Inc.',
       rating: '4.8',

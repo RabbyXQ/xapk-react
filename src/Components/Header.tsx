@@ -61,7 +61,7 @@ const Header: React.FC = () => {
           display="flex"
           alignItems="center"
           justifyContent="space-between"
-          p="4"
+          p="2"
         >
           {/* Flex container for Logo, Search, and Profile */}
           <Flex
@@ -75,7 +75,7 @@ const Header: React.FC = () => {
             </Box>
             <Flex ml="auto" alignItems="center" gap="4"> {/* Align items in a row and add space between them */}
               <Search />
-              <Profile /> {/* Add the Profile component here */}
+              <Profile />
             </Flex>
           </Flex>
         </Box>

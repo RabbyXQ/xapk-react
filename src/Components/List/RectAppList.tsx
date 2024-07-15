@@ -1,17 +1,25 @@
 import React from 'react';
-import { Box, Text, useColorModeValue, Button, Grid, Flex } from '@chakra-ui/react';
-import AppCard from '../Card/AppCard'; // Import AppCard component
+import { Box, Text, useColorModeValue, Button, Flex } from '@chakra-ui/react';
+import RectAppCard from '../Card/RectAppCard'; // Import RectAppCard component
 import { AppItem } from '../Card/AppItem'; // Import the type for better type safety
 
-interface AppListProps {
+interface RectAppListProps {
   items: AppItem[];
   title: string;
 }
 
-const AppList: React.FC<AppListProps> = ({ items, title }) => {
+const RectAppList: React.FC<RectAppListProps> = ({ items, title }) => {
   const titleColor = useColorModeValue('teal.600', 'teal.300');
   const cardBg = useColorModeValue('white', 'gray.700'); // Background color for the card
   const shadow = useColorModeValue('md', 'dark-lg'); // Shadow for the card
+
+  // Number of cards per row
+  const cardsPerRow = 3;
+
+  // Rows needed for the grid
+  const rows = Array.from({ length: Math.ceil(items.length / cardsPerRow) }, (_, rowIndex) =>
+    items.slice(rowIndex * cardsPerRow, rowIndex * cardsPerRow + cardsPerRow)
+  );
 
   return (
     <Box p="4" maxW="container" mx="auto">
@@ -33,24 +41,26 @@ const AppList: React.FC<AppListProps> = ({ items, title }) => {
         </Flex>
 
         <Box overflowX="auto">
-          <Grid
-            templateColumns="repeat(auto-fit, minmax(150px, 1fr))"
+          <Flex
+            direction="row"
+            wrap="nowrap"
             gap="3"
-            minW="100%"
-            gridAutoFlow="column"
-            autoColumns="minmax(150px, 1fr)"
-            gridTemplateRows="repeat(3, 1fr)"
+            minW="max-content"
           >
-            {items.map((item) => (
-              <Box key={item.packageName} m="2">
-                <AppCard item={item} />
+            {rows.map((row, rowIndex) => (
+              <Box key={rowIndex} display="flex" flexDirection="column" mr="3">
+                {row.map((item) => (
+                  <Box key={item.packageName} p="2">
+                    <RectAppCard item={item} />
+                  </Box>
+                ))}
               </Box>
             ))}
-          </Grid>
+          </Flex>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default AppList;
+export default RectAppList;

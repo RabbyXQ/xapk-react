@@ -2,17 +2,17 @@ import React from 'react';
 import { Box, Text, Image, useColorModeValue, VStack } from '@chakra-ui/react';
 import { AppItem } from '../Card/AppItem'; // Import the type for better type safety
 
-interface AppCardProps {
+interface RectAppCardProps {
   item: AppItem;
 }
 
-const AppCard: React.FC<AppCardProps> = ({ item }) => {
+const RectAppCard: React.FC<RectAppCardProps> = ({ item }) => {
   const cardBg = useColorModeValue('white', 'gray.800');
   const itemHoverBg = useColorModeValue('gray.50', 'gray.700');
   const textColor = useColorModeValue('gray.800', 'white');
   const titleColor = useColorModeValue('teal.600', 'teal.300');
   const cardShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-  const cardHoverShadow = '0 6px 10px rgba(0, 0, 0, 0.2)';
+  const cardHoverShadow = '0 5px 10px rgba(0, 0, 0, 0.2)';
 
   return (
     <Box
@@ -21,43 +21,39 @@ const AppCard: React.FC<AppCardProps> = ({ item }) => {
       _hover={{ bg: itemHoverBg, boxShadow: cardHoverShadow }}
       cursor="pointer"
       display="flex"
-      flexDirection="column"
+      flexDirection="row"
       alignItems="center"
-      textAlign="center"
+      textAlign="left"
       transition="all 0.2s ease"
-      minH="160px" // Ensure the card has a minimum height
-      minW="120px"
-      maxW="160px" // Limit the maximum width
-      position="relative"
-      overflow="hidden"
+      h="100px"
+      maxW="320px"
+      overflowX="hidden" // Ensure overflow content is hidden
     >
       <Image
         src={item.image}
         alt={item.title}
-        boxSize="60px" // Adjust size for better scaling
+        boxSize="60px"
         objectFit="cover"
         borderRadius="md"
-        mb="2" // Margin bottom to separate from text
+        mr="4"
       />
-      <VStack spacing="1" alignItems="center" w="full">
+      <VStack spacing="1" alignItems="start" flex="1" overflow="hidden">
         <Text
           fontWeight="bold"
           color={titleColor}
-          fontSize={{ base: 'sm', md: 'md' }} // Responsive font size
+          fontSize="md"
           whiteSpace="nowrap" // Prevent text from wrapping
           overflow="hidden" // Hide overflow text
           textOverflow="ellipsis" // Show ellipsis for overflowing text
-          w="full" // Make sure the text container takes full width
         >
           {item.title}
         </Text>
         <Text
           color={textColor}
-          fontSize={{ base: 'xs', md: 'sm' }} // Responsive font size
+          fontSize="sm"
           whiteSpace="nowrap" // Prevent text from wrapping
           overflow="hidden" // Hide overflow text
           textOverflow="ellipsis" // Show ellipsis for overflowing text
-          w="full" // Make sure the text container takes full width
         >
           {item.packageName}
         </Text>
@@ -66,4 +62,4 @@ const AppCard: React.FC<AppCardProps> = ({ item }) => {
   );
 };
 
-export default AppCard;
+export default RectAppCard;

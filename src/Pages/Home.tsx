@@ -7,69 +7,46 @@ import Footer from '../Components/Footer';
 import BottomNav from '../Components/NavBar/BottomNav';
 import { mockData } from './mockData'; // Import mock data
 import AppSlider from '../Components/Slider/AppSlider';
+import Category from '../Components/Sidebar/Category';
+import RectAppList from '../Components/List/RectAppList';
+import TopWeekList from '../Components/List/TopWeekList';
 
 const Home: React.FC = () => {
   const bgColor = useColorModeValue('gray.100', 'gray.800'); // Background color
   const textColor = useColorModeValue('gray.600', 'gray.200'); // Text color
 
-  const rightListData = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
-
   return (
     <ChakraProvider>
       <Box bg={bgColor} color={textColor} minH="100vh">
         <Header /> {/* Add Header component */}
-        <Grid templateColumns={{ base: '1fr', md: '75fr 25fr' }} gap={6} mt={4}>
+        <Grid templateColumns={{ base: '1fr', md: '75fr 25fr' }} gap={6} mt="10">
           <GridItem bg="white.200" paddingTop="10" borderRadius="md" overflowX="auto">
-
-             <AppSlider/>
+            
+            <Box>
+            <AppSlider/>
+              </Box> 
+            <Box>
             <AppList title='Explore' items={mockData} />
+            </Box>
+            <Box>
+              <RectAppList title='Popular' items={mockData}/>
+            </Box>
+            <Box>
+              <RectAppList title='Top Games' items={mockData}/>
+            </Box>
+            <Box>
+              <RectAppList title='Top Apps' items={mockData}/>
+            </Box>
+            <Box>
+              <RectAppList title='User Reviewed' items={mockData}/>
+            </Box>
           </GridItem>
           <GridItem bg="white.300" paddingTop="50" borderRadius="md">
             <Box>
-              <List spacing={3}>
-                {rightListData.map((item, index) => (
-                  <ListItem key={index}>
-                    <ListIcon as={CheckCircleIcon} color="green.500" />
-                    {item}
-                  </ListItem>
-                ))}
-              </List>
+              <Category/>
+            </Box>
+            <Box>
+              <TopWeekList title='Top 7 of The Week' items={mockData}/>
             </Box>
           </GridItem>
         </Grid>
