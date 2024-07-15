@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, HStack, Button, Text, useColorModeValue } from '@chakra-ui/react';
 import { InfoIcon, SunIcon, SearchIcon, StarIcon, SettingsIcon, ChatIcon, AddIcon, BellIcon } from '@chakra-ui/icons';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation for route information
 
 const NavBar = () => {
-  const [activeButton, setActiveButton] = useState('Home'); // Default active button
+  const location = useLocation(); // Get current location
   const bgColor = useColorModeValue('white', 'gray.800'); // Background color for the navbar
   const color = useColorModeValue('gray.800', 'white'); // Text color for the buttons
   const buttonBg = useColorModeValue('teal.50', 'teal.800'); // Light green background for light mode, darker for dark mode
-  const buttonHoverBg = useColorModeValue('grtealeen.100', 'teal.700'); // Darker green on hover
+  const buttonHoverBg = useColorModeValue('teal.100', 'teal.700'); // Darker green on hover
   const buttonActiveBg = useColorModeValue('teal.200', 'teal.600'); // Active button background
+
+  // Determine active button based on current path
+  const getActiveButton = (path: string) => {
+    return location.pathname === path ? buttonActiveBg : buttonBg;
+  };
 
   return (
     <Box
@@ -34,191 +40,222 @@ const NavBar = () => {
         minW="max-content" // Ensure HStack's minimum width is enough to fit all items
         whiteSpace="nowrap" // Prevent buttons from wrapping to the next line
       >
-        <Button
-          aria-label="Home"
-          variant="solid"
-          bg={activeButton === 'Home' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Home')}
-          leftIcon={<InfoIcon />}
-        >
-          <Text>Home</Text>
-        </Button>
-        <Button
-          aria-label="Trending"
-          variant="solid"
-          bg={activeButton === 'Trending' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Trending')}
-          leftIcon={<SunIcon />}
-        >
-          <Text>Trending</Text>
-        </Button>
-        <Button
-          aria-label="Explore"
-          variant="solid"
-          bg={activeButton === 'Explore' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Explore')}
-          leftIcon={<SearchIcon />}
-        >
-          <Text>Explore</Text>
-        </Button>
-        <Button
-          aria-label="Favorites"
-          variant="solid"
-          bg={activeButton === 'Favorites' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Favorites')}
-          leftIcon={<StarIcon />}
-        >
-          <Text>Favorites</Text>
-        </Button>
-        <Button
-          aria-label="Settings"
-          variant="solid"
-          bg={activeButton === 'Settings' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Settings')}
-          leftIcon={<SettingsIcon />}
-        >
-          <Text>Settings</Text>
-        </Button>
-        {/* New Items */}
-        <Button
-          aria-label="Messages"
-          variant="solid"
-          bg={activeButton === 'Messages' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Messages')}
-          leftIcon={<ChatIcon />}
-        >
-          <Text>Messages</Text>
-        </Button>
-        <Button
-          aria-label="Notifications"
-          variant="solid"
-          bg={activeButton === 'Notifications' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Notifications')}
-          leftIcon={<BellIcon />}
-        >
-          <Text>Notifications</Text>
-        </Button>
-        <Button
-          aria-label="Profile"
-          variant="solid"
-          bg={activeButton === 'Profile' ? buttonActiveBg : buttonBg}
-          color={color}
-          size="sm"
-          fontSize="sm"
-          borderRadius="full"
-          _hover={{
-            bg: buttonHoverBg,
-            transform: 'scale(1.05)',
-            transition: 'background-color 0.3s, transform 0.3s',
-          }}
-          _active={{
-            bg: buttonActiveBg,
-            transform: 'scale(0.98)',
-          }}
-          _focus={{ boxShadow: 'none' }}
-          onClick={() => setActiveButton('Profile')}
-          leftIcon={<AddIcon />} // Changed to AddIcon as placeholder
-        >
-          <Text>Profile</Text>
-        </Button>
+        <Link to="/">
+          <Button
+            aria-label="Home"
+            variant="solid"
+            bg={getActiveButton('/')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<InfoIcon />}
+          >
+            <Text>Home</Text>
+          </Button>
+        </Link>
+        <Link to="/apps">
+          <Button
+            aria-label="Apps"
+            variant="solid"
+            bg={getActiveButton('/apps')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<AddIcon />}
+          >
+            <Text>Apps</Text>
+          </Button>
+        </Link>
+        <Link to="/trending">
+          <Button
+            aria-label="Trending"
+            variant="solid"
+            bg={getActiveButton('/trending')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<SunIcon />}
+          >
+            <Text>Trending</Text>
+          </Button>
+        </Link>
+        <Link to="/explore">
+          <Button
+            aria-label="Explore"
+            variant="solid"
+            bg={getActiveButton('/explore')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<SearchIcon />}
+          >
+            <Text>Explore</Text>
+          </Button>
+        </Link>
+        <Link to="/favorites">
+          <Button
+            aria-label="Favorites"
+            variant="solid"
+            bg={getActiveButton('/favorites')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<StarIcon />}
+          >
+            <Text>Favorites</Text>
+          </Button>
+        </Link>
+        <Link to="/settings">
+          <Button
+            aria-label="Settings"
+            variant="solid"
+            bg={getActiveButton('/settings')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<SettingsIcon />}
+          >
+            <Text>Settings</Text>
+          </Button>
+        </Link>
+        <Link to="/messages">
+          <Button
+            aria-label="Messages"
+            variant="solid"
+            bg={getActiveButton('/messages')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<ChatIcon />}
+          >
+            <Text>Messages</Text>
+          </Button>
+        </Link>
+        <Link to="/notifications">
+          <Button
+            aria-label="Notifications"
+            variant="solid"
+            bg={getActiveButton('/notifications')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<BellIcon />}
+          >
+            <Text>Notifications</Text>
+          </Button>
+        </Link>
+        <Link to="/profile">
+          <Button
+            aria-label="Profile"
+            variant="solid"
+            bg={getActiveButton('/profile')}
+            color={color}
+            size="sm"
+            fontSize="sm"
+            borderRadius="full"
+            _hover={{
+              bg: buttonHoverBg,
+              transform: 'scale(1.05)',
+              transition: 'background-color 0.3s, transform 0.3s',
+            }}
+            _active={{
+              bg: buttonActiveBg,
+              transform: 'scale(0.98)',
+            }}
+            _focus={{ boxShadow: 'none' }}
+            leftIcon={<AddIcon />} // Changed to AddIcon as placeholder
+          >
+            <Text>Profile</Text>
+          </Button>
+        </Link>
       </HStack>
     </Box>
   );

@@ -24,7 +24,7 @@ const Category: React.FC = () => {
       maxW="container" 
       mx="auto" 
       px={{ base: '4', md: '6' }} // Add padding for better spacing
-      py="4" // Add vertical padding
+      py="1.5" // Add vertical padding
       display={{ base: 'none', md: 'block' }} 
     >
       <Box 
