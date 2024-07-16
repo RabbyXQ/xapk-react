@@ -1,105 +1,127 @@
+// Sidebar.tsx
 import React, { useState } from 'react';
 import {
-  Box,
   Flex,
   Heading,
   IconButton,
-  Text,
   useColorMode,
-  Link,
-  useDisclosure,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
 } from '@chakra-ui/react';
-import { InfoIcon, SunIcon, SearchIcon, StarIcon, SettingsIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import {
+  SunIcon,
+  CloseIcon,
+  HamburgerIcon,
+  MoonIcon,
+} from '@chakra-ui/icons';
+import { useLocation } from 'react-router-dom'; // Import useLocation
+import SideItem from './SideItem'; // Import the SideItem component
+import menuItems from './MenuItem/GlobalMenuItems';
 
-const Sidebar = () => {
-  const { colorMode } = useColorMode();
+const Sidebar: React.FC = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('Home'); // State for the active link
+  const location = useLocation(); // Get current location
 
-  // Toggle sidebar visibility
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  // Set the active link based on the current URL path
+  const activeLink = location.pathname;
+
+  const handleToggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  // Function to handle link click and update the active link
+  const handleLinkClick = (url: string) => () => {
+    // Use client-side navigation if needed here
+    setIsSidebarOpen(false); // Optionally close the sidebar after selection
   };
-
-  // Static menu items
-  const menuItems = [
-    { name: 'Home', icon: <InfoIcon />, url: '#' },
-    { name: 'Trending', icon: <SunIcon />, url: '#' },
-    { name: 'Explore', icon: <SearchIcon />, url: '#' },
-    { name: 'Favorites', icon: <StarIcon />, url: '#' },
-    { name: 'Settings', icon: <SettingsIcon />, url: '#' },
-  ];
 
   return (
     <>
-      {/* Button to open/close the Sidebar */}
+      {/* Button to toggle Sidebar */}
       <IconButton
         aria-label={isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
         icon={isSidebarOpen ? <CloseIcon /> : <HamburgerIcon />}
         variant="outline"
         size="sm"
-        onClick={toggleSidebar}
+        onClick={handleToggleSidebar}
         background="none"
         position="fixed"
         top="4"
         left="4"
       />
 
-      {/* Drawer Component for Mobile */}
       <Drawer
         placement="left"
         isOpen={isSidebarOpen}
-        onClose={toggleSidebar}
+        onClose={handleToggleSidebar}
         size="xs"
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader>
-            <Flex align="center" justify="space-between">
-              <Heading size="md">Menu</Heading>
-              <IconButton
-                aria-label="Close Sidebar"
-                icon={<CloseIcon />}
-                variant="outline"
-                onClick={toggleSidebar}
-                background="none"
-              />
-            </Flex>
-          </DrawerHeader>
-
-          <DrawerBody>
-            {menuItems.map(({ name, icon, url }) => (
-              <Link
-                key={name}
-                href={url}
-                onClick={() => setActiveLink(name)}
-                _hover={{ textDecoration: 'none' }}
-              >
-                <Flex
-                  marginY={4}
-                  alignItems="center"
-                  padding={2}
-                  borderRadius={12}
-                  backgroundColor={activeLink === name ? (colorMode === 'light' ? 'teal.200' : 'teal.600') : 'transparent'}
-                  _hover={{
-                    backgroundColor: colorMode === 'light' ? 'teal.200' : 'teal.600',
-                  }}
-                >
-                  <Box marginRight={4}>{icon}</Box>
-                  <Text>{name}</Text>
-                </Flex>
-              </Link>
-            ))}
-          </DrawerBody>
+          <SidebarHeader
+            colorMode={colorMode}
+            toggleColorMode={toggleColorMode}
+            closeSidebar={handleToggleSidebar}
+          />
+          <SidebarBody
+            menuItems={menuItems} // Pass menuItems to SidebarBody
+            activeLink={activeLink}
+            onLinkClick={handleLinkClick}
+          />
         </DrawerContent>
       </Drawer>
     </>
   );
 };
+
+// SidebarHeader Component
+const SidebarHeader: React.FC<{
+  colorMode: string;
+  toggleColorMode: () => void;
+  closeSidebar: () => void;
+}> = ({ colorMode, toggleColorMode, closeSidebar }) => (
+  <DrawerHeader>
+    <Flex align="center" justify="space-between">
+      <Heading size="md">Menu</Heading>
+      <Flex>
+        <IconButton
+          aria-label="Toggle Color Mode"
+          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          onClick={toggleColorMode}
+          variant="outline"
+          marginRight={2}
+        />
+        <IconButton
+          aria-label="Close Sidebar"
+          icon={<CloseIcon />}
+          variant="outline"
+          onClick={closeSidebar}
+        />
+      </Flex>
+    </Flex>
+  </DrawerHeader>
+);
+
+// SidebarBody Component
+const SidebarBody: React.FC<{
+  menuItems: { name: string; icon: React.ElementType; url: string }[];
+  activeLink: string;
+  onLinkClick: (url: string) => () => void;
+}> = ({ menuItems, activeLink, onLinkClick }) => (
+  <DrawerBody>
+    {menuItems.map(({ name, icon, url }) => (
+      <SideItem
+        key={url} // Use URL as key to ensure uniqueness
+        name={name}
+        icon={icon} // Pass icon as a component
+        url={url}
+        isActive={activeLink === url} // Set active state based on the current URL
+        onClick={onLinkClick(url)}
+      />
+    ))}
+  </DrawerBody>
+);
 
 export default Sidebar;

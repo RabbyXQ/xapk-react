@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image, Text, Stack, IconButton } from '@chakra-ui/react';
+import { Box, Image, Text, Stack, IconButton, useColorModeValue } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -34,6 +34,10 @@ const sliderData = [
 
 const NextArrow = (props: any) => {
   const { className, onClick } = props;
+  const bg = useColorModeValue('white', 'gray.700');
+  const hoverBg = useColorModeValue('gray.200', 'gray.600');
+  const activeBg = useColorModeValue('gray.300', 'gray.500');
+
   return (
     <IconButton
       aria-label="Next"
@@ -45,17 +49,21 @@ const NextArrow = (props: any) => {
       top="50%"
       transform="translateY(-50%)"
       zIndex="1"
-      bg="white"
+      bg={bg}
       borderRadius="full"
       boxShadow="lg"
-      _hover={{ bg: 'gray.200' }}
-      _active={{ bg: 'gray.300' }}
+      _hover={{ bg: hoverBg }}
+      _active={{ bg: activeBg }}
     />
   );
 };
 
 const PrevArrow = (props: any) => {
   const { className, onClick } = props;
+  const bg = useColorModeValue('white', 'gray.700');
+  const hoverBg = useColorModeValue('gray.200', 'gray.600');
+  const activeBg = useColorModeValue('gray.300', 'gray.500');
+
   return (
     <IconButton
       aria-label="Previous"
@@ -67,11 +75,11 @@ const PrevArrow = (props: any) => {
       top="50%"
       transform="translateY(-50%)"
       zIndex="1"
-      bg="white"
+      bg={bg}
       borderRadius="full"
       boxShadow="lg"
-      _hover={{ bg: 'gray.200' }}
-      _active={{ bg: 'gray.300' }}
+      _hover={{ bg: hoverBg }}
+      _active={{ bg: activeBg }}
     />
   );
 };
@@ -102,6 +110,8 @@ const AppSlider: React.FC = () => {
     ],
   };
 
+  const textBoxBg = useColorModeValue('rgba(255, 255, 255, 0.8)', 'rgba(0, 0, 0, 0.8)');
+
   return (
     <Box maxW="100%" overflow="hidden" position="relative" p={4}>
       <Slider {...sliderSettings}>
@@ -131,7 +141,7 @@ const AppSlider: React.FC = () => {
               zIndex: -1
             }}
           >
-            <Box bg="rgba(255, 255, 255, 0.8)" p={4} borderRadius="md" maxW="sm" textAlign="center">
+            <Box bg={textBoxBg} p={4} borderRadius="md" maxW="sm" textAlign="center">
               <Image
                 src={item.image}
                 alt={item.title}

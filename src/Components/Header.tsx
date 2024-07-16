@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChakraProvider, Box, Flex } from '@chakra-ui/react';
+import { ChakraProvider, Box, Flex, useColorModeValue } from '@chakra-ui/react';
 import Sidebar from './Sidebar/Sidebar';
 import NavBar from './NavBar/NavBar';
 import Logo from './Header/Logo';
@@ -46,6 +46,10 @@ const Header: React.FC = () => {
     };
   }, [lastScrollTop, scrollTimeout]);
 
+  // Use Chakra UI's useColorModeValue hook to adapt styles to current color mode
+  const headerBg = useColorModeValue('white', 'gray.800');
+  const navBarBg = useColorModeValue('white', 'gray.800');
+
   return (
     <ChakraProvider>
       <Box>
@@ -55,7 +59,7 @@ const Header: React.FC = () => {
           top="0"
           left="0"
           w="full"
-          bg="white"
+          bg={headerBg}
           boxShadow="md"
           zIndex="2"
           display="flex"
@@ -69,7 +73,7 @@ const Header: React.FC = () => {
             w="full"
             maxW="container.xl" // Optional: limit max width for better alignment
           >
-            <Sidebar /> {/* Sidebar should be visible here */}
+            <Sidebar/> {/* Sidebar should be visible here */}
             <Box ml={{ base: '0', md: '8' }}> {/* Adjust margin based on screen size */}
               <Logo />
             </Box>
@@ -87,7 +91,7 @@ const Header: React.FC = () => {
           left="0"
           w="full"
           zIndex="1"
-          bg="white" // Ensure background is set to cover content beneath
+          bg={navBarBg} // Ensure background is set to cover content beneath
           boxShadow="sm" // Add a shadow for separation if needed
           transition="top 0.3s ease" // Smooth transition for visibility change
         >

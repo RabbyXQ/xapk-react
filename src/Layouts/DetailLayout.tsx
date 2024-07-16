@@ -20,13 +20,15 @@ const DetailLayout: React.FC<DetailLayoutProps> = ({ children }) => {
 
   return (
     <ChakraProvider>
+      <Header /> 
       <Box bg={bgColor} color={textColor} minH="100vh" display="flex" flexDirection="column">
-        <Header /> {/* Add Header component */}
+       
         <Box  maxW="container" p="4" my="10">
           {children} 
         </Box>
-        <Footer />
-        <BottomNav/>
+        
+        <Box display={{ base: 'none', md: 'block' }}><Footer /></Box>
+        <Box><BottomNav/></Box>
       </Box>
     </ChakraProvider>
   );

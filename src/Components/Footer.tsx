@@ -1,3 +1,4 @@
+// src/Components/Footer.tsx
 import React from 'react';
 import { Box, Text, Stack, Link, useColorModeValue, Flex } from '@chakra-ui/react';
 
@@ -8,15 +9,16 @@ const Footer: React.FC = () => {
   const linkColor = useColorModeValue('teal.600', 'teal.300'); 
   const linkHoverColor = useColorModeValue('teal.400', 'teal.200');
   const dividerColor = useColorModeValue('teal.300', 'teal.700');
+  
   return (
     <Box
-      bg={bgColor} // Ensure background color is white
+      bg={bgColor}
       color={textColor}
       py="6"
       borderTopWidth="1px"
       borderTopColor={dividerColor}
-      w="100%" // Ensure full width
-      display={{ base: 'none', md: 'block' }} // Hide on mobile
+      w="100%"
+      display={{ base: 'none', md: 'block' }} // Hide on mobile if needed
     >
       <Stack spacing="6" align="center" justify="center" px={{ base: '4', md: '8' }}>
         <Flex direction={{ base: 'column', sm: 'row' }} align="center" justify="space-between" w="full">

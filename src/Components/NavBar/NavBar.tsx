@@ -1,9 +1,29 @@
 import React from 'react';
-import { Box, HStack, Button, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Button,
+  Text,
+  useColorModeValue,
+  Icon,
+  IconProps
+} from '@chakra-ui/react';
 import { InfoIcon, SunIcon, SearchIcon, StarIcon, SettingsIcon, ChatIcon, AddIcon, BellIcon } from '@chakra-ui/icons';
 import { Link, useLocation } from 'react-router-dom'; // Import useLocation for route information
 
-const NavBar = () => {
+const navItems = [
+  { path: '/', label: 'Home', icon: InfoIcon },
+  { path: '/apps', label: 'Apps', icon: AddIcon },
+  { path: '/trending', label: 'Trending', icon: SunIcon },
+  { path: '/explore', label: 'Explore', icon: SearchIcon },
+  { path: '/favorites', label: 'Favorites', icon: StarIcon },
+  { path: '/settings', label: 'Settings', icon: SettingsIcon },
+  { path: '/messages', label: 'Messages', icon: ChatIcon },
+  { path: '/notifications', label: 'Notifications', icon: BellIcon },
+  { path: '/profile', label: 'Profile', icon: AddIcon } // Changed to AddIcon as placeholder
+];
+
+const NavBar: React.FC = () => {
   const location = useLocation(); // Get current location
   const bgColor = useColorModeValue('white', 'gray.800'); // Background color for the navbar
   const color = useColorModeValue('gray.800', 'white'); // Text color for the buttons
@@ -21,7 +41,7 @@ const NavBar = () => {
       bg={bgColor}
       w="full"
       h="12"
-      top="10"
+      top="2"
       left="0"
       transition="transform 0.3s ease"
       zIndex="1"
@@ -40,222 +60,32 @@ const NavBar = () => {
         minW="max-content" // Ensure HStack's minimum width is enough to fit all items
         whiteSpace="nowrap" // Prevent buttons from wrapping to the next line
       >
-        <Link to="/">
-          <Button
-            aria-label="Home"
-            variant="solid"
-            bg={getActiveButton('/')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<InfoIcon />}
-          >
-            <Text>Home</Text>
-          </Button>
-        </Link>
-        <Link to="/apps">
-          <Button
-            aria-label="Apps"
-            variant="solid"
-            bg={getActiveButton('/apps')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<AddIcon />}
-          >
-            <Text>Apps</Text>
-          </Button>
-        </Link>
-        <Link to="/trending">
-          <Button
-            aria-label="Trending"
-            variant="solid"
-            bg={getActiveButton('/trending')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<SunIcon />}
-          >
-            <Text>Trending</Text>
-          </Button>
-        </Link>
-        <Link to="/explore">
-          <Button
-            aria-label="Explore"
-            variant="solid"
-            bg={getActiveButton('/explore')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<SearchIcon />}
-          >
-            <Text>Explore</Text>
-          </Button>
-        </Link>
-        <Link to="/favorites">
-          <Button
-            aria-label="Favorites"
-            variant="solid"
-            bg={getActiveButton('/favorites')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<StarIcon />}
-          >
-            <Text>Favorites</Text>
-          </Button>
-        </Link>
-        <Link to="/settings">
-          <Button
-            aria-label="Settings"
-            variant="solid"
-            bg={getActiveButton('/settings')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<SettingsIcon />}
-          >
-            <Text>Settings</Text>
-          </Button>
-        </Link>
-        <Link to="/messages">
-          <Button
-            aria-label="Messages"
-            variant="solid"
-            bg={getActiveButton('/messages')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<ChatIcon />}
-          >
-            <Text>Messages</Text>
-          </Button>
-        </Link>
-        <Link to="/notifications">
-          <Button
-            aria-label="Notifications"
-            variant="solid"
-            bg={getActiveButton('/notifications')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<BellIcon />}
-          >
-            <Text>Notifications</Text>
-          </Button>
-        </Link>
-        <Link to="/profile">
-          <Button
-            aria-label="Profile"
-            variant="solid"
-            bg={getActiveButton('/profile')}
-            color={color}
-            size="sm"
-            fontSize="sm"
-            borderRadius="full"
-            _hover={{
-              bg: buttonHoverBg,
-              transform: 'scale(1.05)',
-              transition: 'background-color 0.3s, transform 0.3s',
-            }}
-            _active={{
-              bg: buttonActiveBg,
-              transform: 'scale(0.98)',
-            }}
-            _focus={{ boxShadow: 'none' }}
-            leftIcon={<AddIcon />} // Changed to AddIcon as placeholder
-          >
-            <Text>Profile</Text>
-          </Button>
-        </Link>
+        {navItems.map(({ path, label, icon: IconComponent }) => (
+          <Link key={path} to={path}>
+            <Button
+              aria-label={label}
+              variant="solid"
+              bg={getActiveButton(path)}
+              color={color}
+              size="sm"
+              fontSize="sm"
+              borderRadius="full"
+              _hover={{
+                bg: buttonHoverBg,
+                transform: 'scale(1.05)',
+                transition: 'background-color 0.3s, transform 0.3s',
+              }}
+              _active={{
+                bg: buttonActiveBg,
+                transform: 'scale(0.98)',
+              }}
+              _focus={{ boxShadow: 'none' }}
+              leftIcon={<IconComponent />}
+            >
+              <Text>{label}</Text>
+            </Button>
+          </Link>
+        ))}
       </HStack>
     </Box>
   );

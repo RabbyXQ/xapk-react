@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Tabs, TabList, TabPanels, Tab, TabPanel, List, ListItem, ListIcon, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  List,
+  ListItem,
+  ListIcon,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react';
 import { AtSignIcon, CalendarIcon, CheckCircleIcon } from '@chakra-ui/icons';
 
 const appCategories = [
@@ -19,6 +31,12 @@ const gameCategories = [
 const Category: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
+  // Using useColorModeValue to set colors based on the current color mode
+  const bg = useColorModeValue('white', 'gray.800');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const textColor = useColorModeValue('black', 'white');
+  const selectedColor = useColorModeValue('teal.500', 'teal.300');
+
   return (
     <Box 
       maxW="container" 
@@ -28,7 +46,7 @@ const Category: React.FC = () => {
       display={{ base: 'none', md: 'block' }} 
     >
       <Box 
-        bg="white" 
+        bg={bg} 
         p="4" // Increased padding for better visual spacing
         borderRadius="md" 
         boxShadow="md"
@@ -42,7 +60,7 @@ const Category: React.FC = () => {
         >
           <TabList>
             <Tab 
-              _selected={{ color: 'teal.500', borderBottom: '2px solid teal.500' }} 
+              _selected={{ color: selectedColor, borderBottom: `2px solid ${selectedColor}` }} 
               px="4" 
               py="2"
               fontWeight="bold"
@@ -51,7 +69,7 @@ const Category: React.FC = () => {
               Apps
             </Tab>
             <Tab 
-              _selected={{ color: 'teal.500', borderBottom: '2px solid teal.500' }} 
+              _selected={{ color: selectedColor, borderBottom: `2px solid ${selectedColor}` }} 
               px="4" 
               py="2"
               fontWeight="bold"
@@ -71,10 +89,10 @@ const Category: React.FC = () => {
                     px="4"
                     py="2"
                     borderBottom="1px solid" 
-                    borderColor="gray.200"
+                    borderColor={borderColor}
                   >
-                    <ListIcon as={category.icon} color="teal.500" />
-                    <Text ml="3" fontSize="md">{category.name}</Text>
+                    <ListIcon as={category.icon} color={selectedColor} />
+                    <Text ml="3" fontSize="md" color={textColor}>{category.name}</Text>
                   </ListItem>
                 ))}
               </List>
@@ -89,10 +107,10 @@ const Category: React.FC = () => {
                     px="4"
                     py="2"
                     borderBottom="1px solid" 
-                    borderColor="gray.200"
+                    borderColor={borderColor}
                   >
-                    <ListIcon as={category.icon} color="teal.500" />
-                    <Text ml="3" fontSize="md">{category.name}</Text>
+                    <ListIcon as={category.icon} color={selectedColor} />
+                    <Text ml="3" fontSize="md" color={textColor}>{category.name}</Text>
                   </ListItem>
                 ))}
               </List>

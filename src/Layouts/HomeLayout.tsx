@@ -13,15 +13,19 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ children }) => {
   const bgColor = useColorModeValue('gray.100', 'gray.800'); // Background color
   const textColor = useColorModeValue('gray.600', 'gray.200'); // Text color
 
+  // Adjust GridItem background colors for dark mode
+  const contentBgColor = useColorModeValue('white', 'gray.700');
+  const sidebarBgColor = useColorModeValue('gray.50', 'gray.600');
+
   return (
     <ChakraProvider>
+      <Header />
       <Box bg={bgColor} color={textColor} minH="100vh">
-        <Header /> {/* Add Header component */}
         <Grid templateColumns={{ base: '1fr', md: '75fr 25fr' }} gap={6} mt="10">
-          <GridItem bg="white.200" paddingTop="10" borderRadius="md" overflowX="auto">
+          <GridItem bg={contentBgColor} paddingTop="10" borderRadius="md" overflowX="auto">
             {children} {/* Content injected here */}
           </GridItem>
-          <GridItem bg="white.300" paddingTop="50" borderRadius="md">
+          <GridItem bg={sidebarBgColor} paddingTop="50" borderRadius="md">
             <RightSidebar />
           </GridItem>
         </Grid>
