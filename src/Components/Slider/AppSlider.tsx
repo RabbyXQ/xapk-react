@@ -5,7 +5,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-// Sample data for the slider
 const sliderData = [
   {
     title: 'Facebook',
@@ -29,15 +28,11 @@ const sliderData = [
     packageName: 'com.instagram.android',
     cover: 'https://play-lh.googleusercontent.com/W7J_rhJYWt65XQHaZ7N_6Nptu0wC6n4k9WX59qg46KRpe9b5I1LarJqZ7L-Uu9okgA=w1052-h592'
   },
-  // Add more items as needed
 ];
 
 const NextArrow = (props: any) => {
   const { className, onClick } = props;
   const bg = useColorModeValue('white', 'gray.700');
-  const hoverBg = useColorModeValue('gray.200', 'gray.600');
-  const activeBg = useColorModeValue('gray.300', 'gray.500');
-
   return (
     <IconButton
       aria-label="Next"
@@ -51,9 +46,6 @@ const NextArrow = (props: any) => {
       zIndex="1"
       bg={bg}
       borderRadius="full"
-      boxShadow="lg"
-      _hover={{ bg: hoverBg }}
-      _active={{ bg: activeBg }}
     />
   );
 };
@@ -61,9 +53,6 @@ const NextArrow = (props: any) => {
 const PrevArrow = (props: any) => {
   const { className, onClick } = props;
   const bg = useColorModeValue('white', 'gray.700');
-  const hoverBg = useColorModeValue('gray.200', 'gray.600');
-  const activeBg = useColorModeValue('gray.300', 'gray.500');
-
   return (
     <IconButton
       aria-label="Previous"
@@ -77,15 +66,11 @@ const PrevArrow = (props: any) => {
       zIndex="1"
       bg={bg}
       borderRadius="full"
-      boxShadow="lg"
-      _hover={{ bg: hoverBg }}
-      _active={{ bg: activeBg }}
     />
   );
 };
 
 const AppSlider: React.FC = () => {
-  // Slider settings
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -99,7 +84,6 @@ const AppSlider: React.FC = () => {
     autoplaySpeed: 3000,
     pauseOnHover: true,
     pauseOnDotsHover: true,
-    // Responsive breakpoints
     responsive: [
       {
         breakpoint: 768,
@@ -113,17 +97,16 @@ const AppSlider: React.FC = () => {
   const textBoxBg = useColorModeValue('rgba(255, 255, 255, 0.8)', 'rgba(0, 0, 0, 0.8)');
 
   return (
-    <Box maxW="100%" overflow="hidden" position="relative" p={4}>
+    <Box maxW="100%" overflow="hidden" position="relative" p={2}>
       <Slider {...sliderSettings}>
         {sliderData.map((item, index) => (
           <Box
             key={index}
-            p={4}
+            p={2}
             borderRadius="md"
-            boxShadow="lg"
             overflow="hidden"
             position="relative"
-            height="400px"
+            height={{ base: "200px", md: "400px" }}
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -137,31 +120,31 @@ const AppSlider: React.FC = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              filter: "blur(5px)",
+              filter: "blur(2px)",
               zIndex: -1
             }}
           >
-            <Box bg={textBoxBg} p={4} borderRadius="md" maxW="sm" textAlign="center">
+            <Box bg={textBoxBg} p={2} borderRadius="md" maxW={{ base: "90%", md: "sm" }} textAlign="center">
               <Image
                 src={item.image}
                 alt={item.title}
                 borderRadius="full"
-                boxSize="96px"
-                mb={4}
+                boxSize={{ base: "48px", md: "96px" }}
+                mb={2}
                 mx="auto"
               />
-              <Stack spacing={3}>
-                <Text fontSize="lg" fontWeight="bold">
+              <Stack spacing={1}>
+                <Text fontSize={{ base: "sm", md: "lg" }} fontWeight="bold">
                   {item.title}
                 </Text>
-                <Text fontSize="md">{item.description}</Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize={{ base: "xs", md: "md" }}>{item.description}</Text>
+                <Text fontSize="xs" color="gray.600">
                   Developer: {item.developer}
                 </Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize="xs" color="gray.600">
                   Rating: {item.rating} | Reviews: {item.reviews} | Installs: {item.installs}
                 </Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize="xs" color="gray.600">
                   Package Name: {item.packageName}
                 </Text>
               </Stack>

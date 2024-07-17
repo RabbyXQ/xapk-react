@@ -5,6 +5,6 @@ export const adminSidebarItems = [
   { name: 'Platforms', icon: InfoOutlineIcon, url: '/admin/platforms' },
   { name: 'Apps', icon: SettingsIcon, url: '/admin/apps/' },
   { name: 'Games', icon: SettingsIcon, url: '/admin/games/' },
-  { name: 'Uploads', icon: SettingsIcon, url: '/admin/upload/' },
+  { name: 'Uploads', icon: SettingsIcon, url: '/admin/uploads/' },
   { name: 'Logout', icon: SettingsIcon, url: '/admin/logout/' },
 ];
