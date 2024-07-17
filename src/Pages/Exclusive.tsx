@@ -2,26 +2,25 @@ import { Box, Image, Flex, Button, Text, IconButton, useColorMode } from '@chakr
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useRef } from 'react';
 
-// Define color configuration for light and dark modes
 const colors = {
   light: {
-    teal: {
-      500: "#319795",
-      400: "#2c7a7b",
-    },
-    white: "#ffffff",
-    black: "#000000",
-    rgbaBlack50: "rgba(0, 0, 0, 0.5)",
+    hoverColor: '#00d49f',
+    textColor: 'black',
+    backgroundColor: 'white',
+    buttonBg: '#138021',
+    buttonHoverBg: '#3dd382',
+    white: 'white',
+    rgbaBlack50: 'rgba(0, 0, 0, 0.5)',
   },
   dark: {
-    teal: {
-      500: "#2c7a7b",
-      400: "#319795",
-    },
-    white: "#ffffff",
-    black: "#000000",
-    rgbaBlack50: "rgba(0, 0, 0, 0.7)",
-  },
+    hoverColor: '#3dd382',
+    textColor: 'white',
+    backgroundColor: 'gray.800',
+    buttonBg: '#138021',
+    buttonHoverBg: '#3dd382',
+    white: 'white',
+    rgbaBlack50: 'rgba(0, 0, 0, 0.5)',
+  }
 };
 
 const exclusiveItems = [
@@ -54,6 +53,7 @@ const exclusiveItems = [
     downloadLink: "https://apkpure.com/assoluto-racing/com.infinityvector.assolutoracing/download"
   }
 ];
+
 const Exclusive: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { colorMode } = useColorMode();
@@ -81,9 +81,9 @@ const Exclusive: React.FC = () => {
         transform="translateY(-50%)"
         zIndex="1"
         onClick={() => scroll('left')}
-        bg={currentColors.teal[500]}
+        bg={currentColors.buttonBg}
         color={currentColors.white}
-        _hover={{ bg: currentColors.teal[400] }}
+        _hover={{ bg: currentColors.buttonHoverBg }}
       />
       <IconButton
         aria-label="Scroll right"
@@ -94,9 +94,9 @@ const Exclusive: React.FC = () => {
         transform="translateY(-50%)"
         zIndex="1"
         onClick={() => scroll('right')}
-        bg={currentColors.teal[500]}
+        bg={currentColors.buttonBg}
         color={currentColors.white}
-        _hover={{ bg: currentColors.teal[400] }}
+        _hover={{ bg: currentColors.buttonHoverBg }}
       />
       <Flex
         ref={scrollContainerRef}
@@ -121,7 +121,15 @@ const Exclusive: React.FC = () => {
                   <Flex align="center">
                     <Image src={item.iconSrc} alt={item.title} boxSize="32px" mr="2" />
                     <Text color={currentColors.white} fontWeight="bold">{item.title}</Text>
-                    <Button as="a" href={item.downloadLink} target="_blank" rel="noopener noreferrer" ml="auto" size="sm" colorScheme="teal">
+                    <Button as="a" 
+                        href={item.downloadLink} 
+                        target="_blank" 
+                        rel="noopener 
+                        noreferrer" 
+                        ml="auto" 
+                        size="sm" 
+                        bg={currentColors.buttonBg}
+                        _hover={{bg: currentColors.hoverColor}}>
                       Download
                     </Button>
                   </Flex>
