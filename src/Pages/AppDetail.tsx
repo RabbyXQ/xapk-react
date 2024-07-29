@@ -3,7 +3,6 @@ import {
   Box,
   Text,
   useColorModeValue,
-  useBreakpointValue,
   VStack,
   Image,
   Divider,
@@ -25,10 +24,10 @@ import {
   Tr,
   Th,
   Td,
+  ChakraProvider,
 } from '@chakra-ui/react';
-import DetailLayout from '../Layouts/DetailLayout';
-import SingleAppList from '../Components/List/SingleAppList';
-import { mockData } from './mockData';
+import Head from './Head'; // Ensure this component manages theme switching
+import Footer from './Footer';
 
 // Define a demo AppItem for testing
 const demoAppItem = {
@@ -65,12 +64,10 @@ const StarIcon: React.FC<IconProps> = (props) => (
 );
 
 const AppDetail: React.FC = () => {
-  const bgColor = useColorModeValue('gray.100', 'gray.800'); // Background color
+  const bgColor = useColorModeValue('white', 'gray.800'); // Background color
   const textColor = useColorModeValue('gray.600', 'gray.200'); // Text color
-  const cardBg = useColorModeValue('white', 'gray.700'); // Card background color
-  const shadow = useColorModeValue('md', 'dark-lg'); // Shadow for the card
 
-  // Initialize the state with the last version from the versions array
+
   const lastVersion = demoAppItem.versions[demoAppItem.versions.length - 1];
   const [selectedVersion, setSelectedVersion] = useState(lastVersion);
 
@@ -96,15 +93,13 @@ const AppDetail: React.FC = () => {
   };
 
   return (
-    <DetailLayout>
       <Box bg={bgColor} color={textColor} p={4} width="100%">
         <Container maxW="container.xl" p={0}>
           <Box
-            bg={cardBg}
-            p={6}
+            p={4}
             borderRadius="md"
-            shadow={shadow}
-            width="100%" // Ensure the card uses the full width of its container
+            boxShadow="sm"
+            width="100%"
           >
             {/* App Image and Title */}
             <HStack spacing={4} align="start" overflow="hidden" w="full">
@@ -123,7 +118,7 @@ const AppDetail: React.FC = () => {
                 </HStack>
               </VStack>
             </HStack>
-            <Divider my={4} />
+            <Divider my={2} />
 
             {/* App Description */}
             <Text fontSize="lg" fontWeight="semibold" mb={2}>
@@ -202,7 +197,7 @@ const AppDetail: React.FC = () => {
             </Text>
             <Stack spacing={4} mb={4}>
               {comments.map((comment, index) => (
-                <Box key={index} p={3} borderWidth={1} borderRadius="md" borderColor="gray.200" bg="gray.50">
+                <Box bg={bgColor} key={index} p={3} >
                   <HStack spacing={3}>
                     <Avatar src={comment.avatar} size="md" />
                     <VStack align="start" spacing={1}>
@@ -210,7 +205,7 @@ const AppDetail: React.FC = () => {
                       <Text>{comment.text}</Text>
                     </VStack>
                   </HStack>
-                  <Divider my={2} />
+                  <Divider my={1} />
                 </Box>
               ))}
             </Stack>
@@ -229,12 +224,7 @@ const AppDetail: React.FC = () => {
             </FormControl>
           </Box>
         </Container>
-        
       </Box>
-      <Box>
-            <SingleAppList title='Similar' items={mockData}/>
-            </Box>
-    </DetailLayout>
   );
 };
 

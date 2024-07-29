@@ -26,46 +26,52 @@ const colors = {
 
 const games: Game[] = [
   {
-    title: "Fortnite",
-    image: "https://example.com/fortnite.jpg",
+    title: "Chamet - Live Video Chat & Meet",
+    image: "https://image.winudf.com/v2/image1/Y29tLmhrZnVsaWFvLmNoYW1ldF9pY29uXzE2ODQ5NDAzNjVfMDM2/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
     rating: 4.5
   },
   {
-    title: "Call of Duty: WarzoneCall of Duty: WarzoneCall of Duty: WarzoneCall of Duty: WarzoneCall of Duty: Warzone",
-    image: "https://image.winudf.com/v2/image1/Y29tLmhrZnVsaWFvLmNoYW1ldF9pY29uXzE2ODQ5NDAzNjVfMDM2/icon.webp?w=102&fakeurl=1&type=.webp",
+    title: "OKX: Buy Bitcoin BTC & Crypto",
+    image: "https://image.winudf.com/v2/image1/Y29tLm9raW5jLm9rZXguZ3BfaWNvbl8xNjQyNjY2ODA1XzA0OA/icon.webp?w=102&fakeurl=1&type=.webp",
+    href: "#",
+    rating: 4.2
+  },
+  {
+    title: "Careem Captain",
+    image: "https://image.winudf.com/v2/image1/Y29tLmNhcmVlbS5hZG1hX2ljb25fMTU1OTY1NzM2MV8wODA/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
     rating: 4.7
   },
   {
-    title: "Minecraft",
-    image: "https://example.com/minecraft.jpg",
+    title: "Love and Deepspace",
+    image: "https://image.winudf.com/v2/image1/Y29tLnBhcGVnYW1lcy5seXNrLmVuX2ljb25fMTcwNTQ4MzEwOV8wNjU/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
-    rating: 4.6
+    rating: 3.9
   },
   {
-    title: "Apex Legends",
-    image: "https://example.com/apex-legends.jpg",
-    href: "#",
-    rating: 4.4
-  },
-  {
-    title: "Genshin Impact",
-    image: "https://example.com/genshin-impact.jpg",
+    title: "MX Player",
+    image: "https://image.winudf.com/v2/image1/Y29tLm14dGVjaC52aWRlb3BsYXllci5hZF9pY29uXzE1NTgxMTM0NzJfMDcx/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
     rating: 4.8
   },
   {
-    title: "Among Us",
-    image: "https://example.com/among-us.jpg",
+    title: "Tonkeeper — TON Wallet",
+    image: "https://image.winudf.com/v2/image1/Y29tLnRvbl9rZWVwZXJfaWNvbl8xNzE2ODE3MTEwXzAxMg/icon.webp?w=102&fakeurl=1&type=.webp",
+    href: "#",
+    rating: 4.1
+  },
+  {
+    title: "Whoosh",
+    image: "https://image.winudf.com/v2/image1/Y29tLnB1bmljYXBwLndob29zaF9pY29uXzE2ODU0NTAzNjZfMDg3/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
     rating: 4.3
   },
   {
-    title: "PUBG Mobile",
-    image: "https://example.com/pubg-mobile.jpg",
+    title: "TextNow: Call + Text Unlimited",
+    image: "https://image.winudf.com/v2/image1/Y29tLmVuZmxpY2suYW5kcm9pZC5UZXh0Tm93X2ljb25fMTY1Mjc0MzUzN18wNDY/icon.webp?w=102&fakeurl=1&type=.webp",
     href: "#",
-    rating: 4.2
+    rating: 4.0
   }
 ];
 
@@ -73,7 +79,7 @@ const TopGames: React.FC = () => {
   const { colorMode } = useColorMode();
   const colorsMode = colors[colorMode]; // Use colors based on the current color mode
 
-  const columns = useBreakpointValue({ base: 4, sm: 6, md: 5, lg: 6 });
+  const columns = useBreakpointValue({ base: 5, sm: 6, md: 8, lg: 10 });
   const gap = useBreakpointValue({ base: 1, sm: 2, md: 3 });
 
   return (
@@ -115,16 +121,7 @@ const TopGames: React.FC = () => {
                 height="100%"
               />
             </Box>
-            <Text
-              mt={1}
-              fontSize="xs"
-              fontWeight="bold"
-              textAlign="center"
-              noOfLines={2}
-              _hover={{ color: colorsMode.hoverColor }}
-            >
-              {game.title}
-            </Text>
+
             <Box
               mt={2}
               textAlign="center"
@@ -147,13 +144,22 @@ const TopGames: React.FC = () => {
                 {game.rating.toFixed(1)}
               </Text>
             </Box>
+            <Text
+              mt={1}
+              fontSize="xs"
+              fontWeight="bold"
+              textAlign="center"
+              noOfLines={2}
+              _hover={{ color: colorsMode.hoverColor }}
+            >
+              {game.title}
+            </Text>
           </Link>
         ))}
       </Grid>
       <Button
         size="sm"
         mt={4}
-        colorScheme="teal"
         variant="solid"
         bg={colorsMode.hoverColor}
         color={colorsMode.textColor}

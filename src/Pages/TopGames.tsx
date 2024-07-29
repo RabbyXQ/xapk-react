@@ -112,8 +112,8 @@ const TopGames: React.FC = () => {
               mb={2}
             >
               <Box
-                width="80px"
-                height="80px"
+                width="65px"
+                height="65px"
                 overflow="hidden"
                 mr={2}
               >

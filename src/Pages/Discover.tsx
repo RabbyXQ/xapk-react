@@ -69,7 +69,7 @@ const Discover: React.FC = () => {
   const { colorMode } = useColorMode();
   const colorsMode = colors[colorMode]; // Use colors based on the current color mode
 
-  const columns = useBreakpointValue({ base: 4, sm: 6, md: 5, lg: 5, xl: 6 });
+  const columns = useBreakpointValue({ base: 5, sm: 6, md: 8, lg: 10, xl: 10 });
   const gap = useBreakpointValue({ base: 1, sm: 2, md: 3 }); // Adjust gap based on breakpoint
 
   return (

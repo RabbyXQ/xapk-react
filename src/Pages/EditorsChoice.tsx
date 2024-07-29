@@ -25,24 +25,7 @@ const colors = {
 };
 
 const apps: App[] = [
-  {
-    title: "Chamet - Live Video Chat & Meet",
-    image: "https://image.winudf.com/v2/image1/Y29tLmhrZnVsaWFvLmNoYW1ldF9pY29uXzE2ODQ5NDAzNjVfMDM2/icon.webp?w=102&fakeurl=1&type=.webp",
-    href: "#",
-    rating: 4.5
-  },
-  {
-    title: "OKX: Buy Bitcoin BTC & Crypto",
-    image: "https://image.winudf.com/v2/image1/Y29tLm9raW5jLm9rZXguZ3BfaWNvbl8xNjQyNjY2ODA1XzA0OA/icon.webp?w=102&fakeurl=1&type=.webp",
-    href: "#",
-    rating: 4.2
-  },
-  {
-    title: "Careem Captain",
-    image: "https://image.winudf.com/v2/image1/Y29tLmNhcmVlbS5hZG1hX2ljb25fMTU1OTY1NzM2MV8wODA/icon.webp?w=102&fakeurl=1&type=.webp",
-    href: "#",
-    rating: 4.7
-  },
+  
   {
     title: "Love and Deepspace",
     image: "https://image.winudf.com/v2/image1/Y29tLnBhcGVnYW1lcy5seXNrLmVuX2ljb25fMTcwNTQ4MzEwOV8wNjU/icon.webp?w=102&fakeurl=1&type=.webp",
@@ -75,16 +58,18 @@ const apps: App[] = [
   }
 ];
 
-const TopApps: React.FC = () => {
+const EditorsChoice: React.FC = () => {
   const { colorMode } = useColorMode();
   const colorsMode = colors[colorMode]; // Use colors based on the current color mode
 
-  const columns = useBreakpointValue({ base: 1, sm: 2, md: 2, lg: 2 });
+  const columns = useBreakpointValue({ base: 1, sm: 1, md: 1, lg: 1 });
   const gap = useBreakpointValue({ base: 1, sm: 2, md: 2 });
 
   return (
-    <Box p={2} bg={colorsMode.backgroundColor} color={colorsMode.textColor}>
-      <Heading mb={2} fontSize="sm" textAlign="start">Top Apps</Heading>
+    <Box 
+    display={{ base: 'none', md: 'block'}}
+    p={2} bg={colorsMode.backgroundColor} color={colorsMode.textColor}>
+      <Heading mb={2} fontSize="sm" textAlign="start">Editor's Choice</Heading>
       <Grid
         templateColumns={`repeat(${columns}, 1fr)`}
         gap={gap}
@@ -172,4 +157,4 @@ const TopApps: React.FC = () => {
   );
 };
 
-export default TopApps;
+export default EditorsChoice;

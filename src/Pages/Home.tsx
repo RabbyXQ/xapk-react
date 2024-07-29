@@ -10,25 +10,31 @@ import Discover from './Discover';
 import TopApps from './TopApps';
 import TopGames from './TopGames';
 import Footer from './Footer';
+import EditorsChoice from './EditorsChoice';
+import Category from '../Components/Sidebar/Category';
+import LastDownloads from './LastDownloads';
+import AppDetail from './AppDetail';
 
 const Layout: React.FC = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false, lg: false });
+  const isMobile = useBreakpointValue({ base: true, xm: true, md: false, lg: false });
 
   return (
-    <Box>
+    <Box maxW="container">
       <Grid
-        templateColumns={isMobile ? '1fr' : '1fr 1fr'} // Single column on mobile, two columns on larger screens
+        templateColumns={isMobile ? '1fr' : '70fr 30fr'} // Single column on mobile, two columns on larger screens
         gap={2}
       >
         <Box>
           <Discover/>
           <TopApps/>
+          <Popular/>
+          <TopGames/>
         </Box>
         <Box>
-        <Popular/>
-        <TopGames/>
+        <Category/>
         </Box>
       </Grid>
+
     </Box>
   );
 };
