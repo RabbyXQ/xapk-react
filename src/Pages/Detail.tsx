@@ -7,7 +7,7 @@ import Discover from './Discover';
 
 
 
-const Home: React.FC = () => {
+const Detail: React.FC = () => {
   return (
   <ChakraProvider>
   <Head/>
@@ -21,4 +21,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Detail;

@@ -4,34 +4,31 @@ import {
   HStack,
   Button,
   Text,
+  Image,
   useColorModeValue,
-  Icon,
-  IconProps
+
 } from '@chakra-ui/react';
-import { InfoIcon, SunIcon, SearchIcon, StarIcon, SettingsIcon, ChatIcon, AddIcon, BellIcon } from '@chakra-ui/icons';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation for route information
+import { Link, useLocation } from 'react-router-dom';
 
-const navItems = [
-  { path: '/', label: 'Home', icon: InfoIcon },
-  { path: '/apps', label: 'Apps', icon: AddIcon },
-  { path: '/trending', label: 'Trending', icon: SunIcon },
-  { path: '/explore', label: 'Explore', icon: SearchIcon },
-  { path: '/favorites', label: 'Favorites', icon: StarIcon },
-  { path: '/settings', label: 'Settings', icon: SettingsIcon },
-  { path: '/messages', label: 'Messages', icon: ChatIcon },
-  { path: '/notifications', label: 'Notifications', icon: BellIcon },
-  { path: '/profile', label: 'Profile', icon: AddIcon } // Changed to AddIcon as placeholder
-];
 
-const NavBar: React.FC = () => {
-  const location = useLocation(); // Get current location
-  const bgColor = useColorModeValue('white', 'gray.800'); // Background color for the navbar
-  const color = useColorModeValue('gray.800', 'white'); // Text color for the buttons
-  const buttonBg = useColorModeValue('teal.50', 'teal.800'); // Light green background for light mode, darker for dark mode
-  const buttonHoverBg = useColorModeValue('teal.100', 'teal.700'); // Darker green on hover
-  const buttonActiveBg = useColorModeValue('teal.200', 'teal.600'); // Active button background
+interface Items{
+  path: string,
+  title: string,
+  imgSrc: string
+}
 
-  // Determine active button based on current path
+interface NavBarProps{
+  items: Items[]
+}
+
+const NavBar: React.FC<NavBarProps> = ({items}) => {
+  const location = useLocation();
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const color = useColorModeValue('gray.800', 'white');
+  const buttonBg = useColorModeValue('teal.50', 'teal.800');
+  const buttonHoverBg = useColorModeValue('teal.100', 'teal.700');
+  const buttonActiveBg = useColorModeValue('teal.200', 'teal.600');
+
   const getActiveButton = (path: string) => {
     return location.pathname === path ? buttonActiveBg : buttonBg;
   };
@@ -49,21 +46,34 @@ const NavBar: React.FC = () => {
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       position="relative"
-      overflowX="auto" // Enable horizontal scrolling for the Box
-      whiteSpace="nowrap" // Prevent content from wrapping
+      overflowX="auto"
+      whiteSpace="nowrap"
+      sx={{
+        '&::-webkit-scrollbar': {
+          width: '8px',
+          height: '8px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0, 0, 0, 0.2)',
+          borderRadius: '8px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+      }}
     >
       <HStack
         spacing="4"
         align="center"
         h="full"
         px="4"
-        minW="max-content" // Ensure HStack's minimum width is enough to fit all items
-        whiteSpace="nowrap" // Prevent buttons from wrapping to the next line
+        minW="max-content"
+        whiteSpace="nowrap"
       >
-        {navItems.map(({ path, label, icon: IconComponent }) => (
+        {items.map(({ path, title, imgSrc }) => (
           <Link key={path} to={path}>
             <Button
-              aria-label={label}
+              aria-label={title}
               variant="solid"
               bg={getActiveButton(path)}
               color={color}
@@ -80,9 +90,9 @@ const NavBar: React.FC = () => {
                 transform: 'scale(0.98)',
               }}
               _focus={{ boxShadow: 'none' }}
-              leftIcon={<IconComponent />}
+              leftIcon={<Image src={imgSrc} boxSize="24px" />}
             >
-              <Text>{label}</Text>
+              <Text>{title}</Text>
             </Button>
           </Link>
         ))}
